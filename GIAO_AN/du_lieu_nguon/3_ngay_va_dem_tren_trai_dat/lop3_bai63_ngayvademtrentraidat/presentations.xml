@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<presentations version="7">
+	<presentation src="C:\Users\USER\Desktop\Ho_Thi_Xu_Xu\du_lieu_nguon\2_mat_troi\lop3_bai58_mattroi.pptx">
+		<resource src="quiz\quiz1.quiz"/>
+		<resource src="quiz\quiz10.quiz"/>
+		<resource src="quiz\quiz11.quiz"/>
+		<resource src="quiz\quiz2.quiz"/>
+		<resource src="quiz\quiz3.quiz"/>
+		<resource src="quiz\quiz4.quiz"/>
+		<resource src="quiz\quiz5.quiz"/>
+		<resource src="quiz\quiz6.quiz"/>
+		<resource src="quiz\quiz7.quiz"/>
+		<resource src="quiz\quiz8.quiz"/>
+		<resource src="quiz\quiz9.quiz"/>
+	</presentation>
+</presentations>
