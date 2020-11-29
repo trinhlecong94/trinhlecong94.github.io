@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<presentation guid="5FAA0C50-2970-4BE7-B176-C6F0C631C643" version="0" availableOffline="1">
+<presentation guid="77FEC53B-6D62-4C8A-A2AC-BC77D8330429" version="0" availableOffline="1">
 	<info>
 		<title>ngay_va_dem_tren_trai_dat</title>
 		<description/>
 	</info>
-	<files index="id144" thumbnail="id202" totalSize="53611900">
+	<files index="id144" thumbnail="id203" totalSize="53710086">
 		<file id="id0">data/thmb1.png</file>
 		<file id="id1">data/slide1.js</file>
 		<file id="id2">data/slide1.css</file>
@@ -44,7 +44,7 @@
 		<file id="id36">data/quiz2/audios/snd-892699ef0a4bc4a2ea893f120aa31d8d7b991122.mp3</file>
 		<file id="id37">data/quiz2/fonts/fnt0.woff</file>
 		<file id="id38">data/quiz2/fonts/fnt1.woff</file>
-		<file id="id39">data/quiz2/images/3c27-b602-42b1-8a4c.png</file>
+		<file id="id39">data/quiz2/images/6c3c-3cb5-0982-ba8d.png</file>
 		<file id="id40">data/quiz2/images/img-4fb3abdf3d07cb7994c35edf5471de8c73a53e54.jpg</file>
 		<file id="id41">data/quiz2/images/img-cd1846c3089ed1768e87e675211a5ef25ef440da.jpg</file>
 		<file id="id42">data/quiz2/images/img-d972eb2f9e5fbb179b89eb4185f5a014e3d7f7f0.jpg</file>
@@ -158,51 +158,52 @@
 		<file id="id154">data/fnt1.woff</file>
 		<file id="id155">data/fnt10.woff</file>
 		<file id="id156">data/fnt11.woff</file>
-		<file id="id157">data/fnt2.woff</file>
-		<file id="id158">data/fnt3.woff</file>
-		<file id="id159">data/fnt4.woff</file>
-		<file id="id160">data/fnt5.woff</file>
-		<file id="id161">data/fnt6.woff</file>
-		<file id="id162">data/fnt7.woff</file>
-		<file id="id163">data/fnt8.woff</file>
-		<file id="id164">data/fnt9.woff</file>
-		<file id="id165">data/html5-unsupported.html</file>
-		<file id="id166">data/html5.png</file>
-		<file id="id167">data/img0.png</file>
-		<file id="id168">data/img1.gif</file>
-		<file id="id169">data/img10.png</file>
-		<file id="id170">data/img11.png</file>
-		<file id="id171">data/img12.png</file>
-		<file id="id172">data/img13.png</file>
-		<file id="id173">data/img14.png</file>
-		<file id="id174">data/img15.png</file>
-		<file id="id175">data/img16.jpg</file>
-		<file id="id176">data/img17.png</file>
-		<file id="id177">data/img18.png</file>
-		<file id="id178">data/img19.jpg</file>
-		<file id="id179">data/img2.png</file>
-		<file id="id180">data/img20.png</file>
-		<file id="id181">data/img21.png</file>
-		<file id="id182">data/img22.png</file>
-		<file id="id183">data/img23.gif</file>
-		<file id="id184">data/img24.png</file>
-		<file id="id185">data/img25.png</file>
-		<file id="id186">data/img26.png</file>
-		<file id="id187">data/img27.jpg</file>
-		<file id="id188">data/img28.jpg</file>
-		<file id="id189">data/img29.jpg</file>
-		<file id="id190">data/img3.png</file>
-		<file id="id191">data/img30.jpg</file>
-		<file id="id192">data/img31.jpg</file>
-		<file id="id193">data/img32.jpg</file>
-		<file id="id194">data/img4.png</file>
-		<file id="id195">data/img5.png</file>
-		<file id="id196">data/img6.jpg</file>
-		<file id="id197">data/img7.png</file>
-		<file id="id198">data/img8.png</file>
-		<file id="id199">data/img9.png</file>
-		<file id="id200">data/logo.png</file>
-		<file id="id201">data/photo1.png</file>
-		<file id="id202">data/ismplayer/preview.png</file>
+		<file id="id157">data/fnt12.woff</file>
+		<file id="id158">data/fnt2.woff</file>
+		<file id="id159">data/fnt3.woff</file>
+		<file id="id160">data/fnt4.woff</file>
+		<file id="id161">data/fnt5.woff</file>
+		<file id="id162">data/fnt6.woff</file>
+		<file id="id163">data/fnt7.woff</file>
+		<file id="id164">data/fnt8.woff</file>
+		<file id="id165">data/fnt9.woff</file>
+		<file id="id166">data/html5-unsupported.html</file>
+		<file id="id167">data/html5.png</file>
+		<file id="id168">data/img0.png</file>
+		<file id="id169">data/img1.gif</file>
+		<file id="id170">data/img10.png</file>
+		<file id="id171">data/img11.png</file>
+		<file id="id172">data/img12.png</file>
+		<file id="id173">data/img13.png</file>
+		<file id="id174">data/img14.png</file>
+		<file id="id175">data/img15.png</file>
+		<file id="id176">data/img16.jpg</file>
+		<file id="id177">data/img17.png</file>
+		<file id="id178">data/img18.png</file>
+		<file id="id179">data/img19.jpg</file>
+		<file id="id180">data/img2.png</file>
+		<file id="id181">data/img20.png</file>
+		<file id="id182">data/img21.png</file>
+		<file id="id183">data/img22.png</file>
+		<file id="id184">data/img23.gif</file>
+		<file id="id185">data/img24.png</file>
+		<file id="id186">data/img25.png</file>
+		<file id="id187">data/img26.png</file>
+		<file id="id188">data/img27.jpg</file>
+		<file id="id189">data/img28.jpg</file>
+		<file id="id190">data/img29.jpg</file>
+		<file id="id191">data/img3.png</file>
+		<file id="id192">data/img30.jpg</file>
+		<file id="id193">data/img31.jpg</file>
+		<file id="id194">data/img32.jpg</file>
+		<file id="id195">data/img4.png</file>
+		<file id="id196">data/img5.png</file>
+		<file id="id197">data/img6.jpg</file>
+		<file id="id198">data/img7.png</file>
+		<file id="id199">data/img8.png</file>
+		<file id="id200">data/img9.png</file>
+		<file id="id201">data/logo.png</file>
+		<file id="id202">data/photo1.png</file>
+		<file id="id203">data/ismplayer/preview.png</file>
 	</files>
 </presentation>

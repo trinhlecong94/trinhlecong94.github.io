@@ -1,0 +1,149 @@
+<exportedTemplate version="1">
+  <customTemplate>
+    <name>Untitled</name>
+    <colorSettings>
+      <color id="button.content.normal">#FFFFFF</color>
+      <color id="button.content.over">#FFFFFF</color>
+      <color id="button.face.normal">#528BDF</color>
+      <color id="button.face.over">#4B7DC9</color>
+      <color id="companyLogo.background">#FFFFFF</color>
+      <color id="hyperlink">#CA6015</color>
+      <color id="listItem.face.over">#FACE72</color>
+      <color id="listItem.face.pressed">#75432B</color>
+      <color id="listItem.label.over">#514438</color>
+      <color id="listItem.label.pressed">#FFFFFF</color>
+      <color id="listItem.label.visited">#5E5E5E</color>
+      <color id="page.background">#CED1D3</color>
+      <color id="panel.background">#FFF7EA</color>
+      <color id="panel.text">#47484A</color>
+      <color id="player.background">#FFFFFF</color>
+      <color id="popup.background">#FBF9F3</color>
+      <color id="progress.background">#FFD75F</color>
+      <color id="progress.loading">#FFD75F</color>
+      <color id="progress.playback">#C8863C</color>
+      <color id="slide.border">#E0E0E0</color>
+      <color id="text">#514438</color>
+    </colorSettings>
+    <messages>
+      <message id="PB_COMPANY_LOGO_BIG">Company Logo(268x156)</message>
+      <message id="PB_COMPANY_LOGO_SMALL">Company Logo (268x50)</message>
+      <message id="PB_CONTROL_PANEL_NEXT">TIẾP TỤC</message>
+      <message id="PB_CONTROL_PANEL_OUTLINE">TỔNG QUAN</message>
+      <message id="PB_CONTROL_PANEL_PREV">QUAY LẠI</message>
+      <message id="PB_CURRENT_SLIDE_IS_NOT_COMPLETED">Bạn phải xem toàn bộ trang trình bày để tiếp tục</message>
+      <message id="PB_DOMAIN_RESTRICTION">Xin lỗi, tác giả đã vô hiệu xem</message>
+      <message id="PB_DOWNLOAD_APP_MESSAGE">To view this presentation with video, download free iOS application iSpring Play</message>
+      <message id="PB_DRAWING_TOOLS_END_DRAWING">Kết thúc vẽ</message>
+      <message id="PB_DRAWING_TOOLS_ERASER">Xóa</message>
+      <message id="PB_DRAWING_TOOLS_ERASE_ALL">Xóa tất cả</message>
+      <message id="PB_DRAWING_TOOLS_HIGHLIGHTER">Highlighter</message>
+      <message id="PB_DRAWING_TOOLS_PEN">Bút</message>
+      <message id="PB_ENTER_PASSWORD">Nhập mật khẩu</message>
+      <message id="PB_INCORRECT_PASSWORD">Mật khẩu không chính xác</message>
+      <message id="PB_INTERACTION_SLIDE_WINDOW_TEXT">You must complete the interaction before leaving this slide.</message>
+      <message id="PB_LAUNCH_BTN_LABEL">Launch</message>
+      <message id="PB_LAUNCH_IN_APP_MESSAGE">To view with video, use iSpring Play.</message>
+      <message id="PB_MESSAGE_BOX_NO">Không</message>
+      <message id="PB_MESSAGE_BOX_OK">Đồng ý</message>
+      <message id="PB_MESSAGE_BOX_YES">Có</message>
+      <message id="PB_NAVIGATION_IS_RESTRICTED">Bạn chỉ có thể truy cập các trang trình bày đã xem trước đó.</message>
+      <message id="PB_NAVIGATION_IS_SEQUENTIAL">Bạn phải xem các trang trình bày theo thứ tự nhất định.</message>
+      <message id="PB_PRECEDING_QUIZ_FAILED_WINDOW_TEXT">You may not advance because you did not pass the quiz at slide %SLIDE_INDEX%.</message>
+      <message id="PB_PRECEDING_QUIZ_NOT_COMPLETED_WINDOW_TEXT">Bạn phải làm lại câu hỏi %SLIDE_INDEX% để tiếp tục.</message>
+      <message id="PB_PRECEDING_QUIZ_NOT_PASSED_WINDOW_TEXT">Bạn phải vượt qua bài tập %SLIDE_INDEX% để tiếp tục.</message>
+      <message id="PB_PRECEDING_SCENARIO_FAILED_WINDOW_TEXT">You may not advance because you did not pass the simulation at slide %SLIDE_INDEX%.</message>
+      <message id="PB_PRECEDING_SCENARIO_NOT_COMPLETED_WINDOW_TEXT">You must attempt the simulation at slide %SLIDE_INDEX% to advance.</message>
+      <message id="PB_PRECEDING_SCENARIO_NOT_PASSED_WINDOW_TEXT">You must pass the simulation at slide %SLIDE_INDEX% to advance.</message>
+      <message id="PB_PRESENTER_BIO">Bio</message>
+      <message id="PB_PRESENTER_EMAIL">Email</message>
+      <message id="PB_PRESENTER_HIDE_BIO">Hide</message>
+      <message id="PB_PRESENTER_INFO">Presenter Info</message>
+      <message id="PB_PRESENTER_NO_INFO">Không có thông tin người soạn</message>
+      <message id="PB_PRESENTER_SHOW_BIO">See more</message>
+      <message id="PB_PRESENTER_VIDEO">Presenter Video</message>
+      <message id="PB_PRESENTER_WEBSITE">Website</message>
+      <message id="PB_QUIZ_SLIDE_WINDOW_TEXT">You must complete the quiz before leaving this slide.</message>
+      <message id="PB_RESTRICTION_MESSAGE_BOX_TITLE">Danh mục chính bị giới hạn</message>
+      <message id="PB_RESUME_PRESENTATION_WINDOW_TEXT">Would you like to resume the presentation from the last slide viewed?</message>
+      <message id="PB_RESUME_PRESENTATION_WINDOW_TITLE">Tiếp tục bài giảng</message>
+      <message id="PB_SCENARIO_SLIDE_WINDOW_TEXT">You must complete the simulation before leaving this slide.</message>
+      <message id="PB_SEARCH_CANCEL">Hủy</message>
+      <message id="PB_SEARCH_NO_RESULTS_LABEL">Không tìm thấy kết quả</message>
+      <message id="PB_SEARCH_PANEL_DEFAULT_TEXT">Tìm…</message>
+      <message id="PB_SEARCH_RESULTS_LABEL">KẾT QUẢ TÌM KIẾM:</message>
+      <message id="PB_SEARCH_RESULT_IN_NOTES_LABEL">[Ghi chú]</message>
+      <message id="PB_SEARCH_RESULT_IN_TEXT_LABEL">[Slide text]</message>
+      <message id="PB_TAB_NOTES_LABEL">Ghi chú</message>
+      <message id="PB_TAB_OUTLINE_LABEL">Tiêu đề</message>
+      <message id="PB_TIME_RESTRICTION">Sorry, the author has disabled viewing the presentation at the moment.</message>
+      <message id="PB_TITLE_PANEL_ATTACHMENTS">Đính kèm</message>
+      <message id="PB_TITLE_PANEL_MARKER_TOOLS">Công cụ vẽ</message>
+      <message id="PB_TITLE_PANEL_NOTES">Ghi chú</message>
+      <message id="PB_TITLE_PANEL_OUTLINE">Tổng quan</message>
+      <message id="PB_TITLE_PANEL_PRESENTER_INFO">Thông tin giáo viên</message>
+      <message id="PB_TOOLTIP_ADD_LOGO">Click to add a company logo</message>
+      <message id="PB_TOOLTIP_CHANGE_LOGO">Click to edit a company logo</message>
+      <message id="PB_TREE_CONTROL_LOADING">Loading…</message>
+      <message id="PB_VIDEO_WINDOW_NO_VIDEO_LABEL">Không có</message>
+    </messages>
+    <layout>
+      <controlPanelSettings>
+        <visible>true</visible>
+        <showOutline>false</showOutline>
+        <showPlayPause>true</showPlayPause>
+        <showRewind>true</showRewind>
+        <showVolumeControl>true</showVolumeControl>
+        <showCCButton>false</showCCButton>
+        <showPrevButton>true</showPrevButton>
+        <showNextButton>true</showNextButton>
+        <showSlideOnlyButton>true</showSlideOnlyButton>
+        <progressBar>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <showLabels>true</showLabels>
+          <mode>slideTimeline</mode>
+        </progressBar>
+        <navigationMode>bySlides</navigationMode>
+      </controlPanelSettings>
+      <titlePanelSettings>
+        <showLogo>false</showLogo>
+        <visible>true</visible>
+        <buttons>
+          <button type="markerTools" visible="true"/>
+          <button type="presenterInfo" visible="true"/>
+          <button type="notes" visible="false"/>
+          <button type="outline" visible="false"/>
+          <button type="attachments" visible="true"/>
+        </buttons>
+      </titlePanelSettings>
+      <outlinePanelSettings>
+        <numberEntries>true</numberEntries>
+        <highlightViewedEntries>true</highlightViewedEntries>
+        <thumbnails>false</thumbnails>
+        <search>true</search>
+        <multilevel>false</multilevel>
+      </outlinePanelSettings>
+      <sidePanelSettings>
+        <showAtLeft>false</showAtLeft>
+        <showLogo>false</showLogo>
+        <showPresenterInfo>false</showPresenterInfo>
+        <showPresenterVideo>true</showPresenterVideo>
+        <visible>true</visible>
+        <tabsPanel>
+          <showOutline>true</showOutline>
+          <showNotes>true</showNotes>
+        </tabsPanel>
+      </sidePanelSettings>
+      <settings>
+        <autoStart>true</autoStart>
+        <saveAnimationStates>true</saveAnimationStates>
+        <loopPresentation>false</loopPresentation>
+        <autoPlayAnimations>false</autoPlayAnimations>
+        <autoPlayAnimationsTime>2</autoPlayAnimationsTime>
+        <navigationType>free</navigationType>
+        <enableKeyboardNavigation>true</enableKeyboardNavigation>
+        <resumeMode>prompt</resumeMode>
+      </settings>
+    </layout>
+  </customTemplate>
+</exportedTemplate>
