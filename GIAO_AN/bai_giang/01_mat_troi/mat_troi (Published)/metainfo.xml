@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<presentation guid="BB4CBA54-51BA-4703-92B4-39DB01759559" version="0" availableOffline="1">
+<presentation guid="6C93AA1D-9208-4070-B44C-8DB1CADB759B" version="0" availableOffline="1">
 	<info>
 		<title>mat_troi</title>
 		<description/>
 	</info>
-	<files index="id209" thumbnail="id310" totalSize="88925042">
+	<files index="id209" thumbnail="id310" totalSize="88899470">
 		<file id="id0">data/thmb1.png</file>
 		<file id="id1">data/slide1.js</file>
 		<file id="id2">data/slide1.css</file>
@@ -44,7 +44,7 @@
 		<file id="id36">data/quiz2.js</file>
 		<file id="id37">data/quiz2/fonts/fnt0.woff</file>
 		<file id="id38">data/quiz2/fonts/fnt1.woff</file>
-		<file id="id39">data/quiz2/images/17fb-69f6-6782-12d8.png</file>
+		<file id="id39">data/quiz2/images/bbe4-53cd-8554-417a.png</file>
 		<file id="id40">data/quiz2/images/img-e7dc6e7853122af1a31349b5e639ccb80a05abae.png</file>
 		<file id="id41">data/quiz2/images/quiz_bg_1.png</file>
 		<file id="id42">data/thmb10.png</file>
@@ -312,11 +312,5 @@
 		<file id="id308">data/img9.png</file>
 		<file id="id309">data/logo.png</file>
 		<file id="id310">data/ismplayer/preview.png</file>
-		<file id="id311">data/ismplayer/play.svg</file>
-		<file id="id312">data/ismplayer/style.css</file>
-		<file id="id313">data/ismplayer/style_mini.css</file>
-		<file id="id314">ismplayer.html</file>
-		<file id="id315">data/ismplayer/app_store2x.png</file>
-		<file id="id316">metainfo.xml</file>
 	</files>
 </presentation>
