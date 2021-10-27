@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<mediaClip denoised="false" endTrimDuration="0" startTrimDuration="0" version="1">
+
+  <files>
+    <file id="1" path="..\files\aa1af1b5.mp3"/>
+  </files>
+
+  <dataChunks>
+    <fileChunk fileId="1">
+      <range duration="20954" startTime="15910"/>
+    </fileChunk>
+  </dataChunks>
+
+  <envelopeChunks src="envelop.bin">
+    <chunk numSamples="2095" startClipPosition="0"/>
+  </envelopeChunks>
+
+</mediaClip>
