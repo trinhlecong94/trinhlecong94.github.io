@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz 40 Câu Hỏi - Tìm Hiểu Các Nghị Quyết</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            margin-top: 15px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .content {
+            padding: 20px;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .question-block.answered {
+            background: #f0f8ff;
+        }
+
+        .question-block.correct {
+            border-left-color: #4CAF50;
+            background: #f1f8f4;
+        }
+
+        .question-block.incorrect {
+            border-left-color: #f44336;
+            background: #fef5f5;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 15px;
+        }
+
+        .option:hover:not(.disabled) {
+            background: #f0f0f0;
+            border-color: #667eea;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .option.selected {
+            background: #e3f2fd;
+            border-color: #667eea;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option.correct {
+            background: #c8e6c9;
+            border-color: #4CAF50;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .option.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.incorrect-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-reset {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #5568d3;
+        }
+
+        .btn-show-answers {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-show-answers:hover {
+            background: #e68900;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            .question-block {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .question-text {
+                font-size: 14px;
+            }
+
+            .option {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+
+            .stat-number {
+                font-size: 20px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+        }
+
+        .section-title {
+            background: #667eea;
+            color: white;
+            padding: 12px 20px;
+            margin: 20px -20px 15px -20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Quiz Các Nghị Quyết</h1>
+            <p>Tìm Hiểu Về Các Nghị Quyết Trung Ương</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="content" id="content">
+            <!-- Questions will be inserted here -->
+        </div>
+
+        <div class="footer">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="correctCount">0</div>
+                    <div class="stat-label">Đúng</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="incorrectCount">0</div>
+                    <div class="stat-label">Sai</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="skippedCount">0</div>
+                    <div class="stat-label">Chưa trả lời</div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn-reset" onclick="resetQuiz()">🔄 Làm Lại</button>
+                <button class="btn-show-answers" onclick="showAllAnswers()">👀 Xem Đáp Án</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                section: "I. NGHỊ QUYẾT ĐẠI HỘI XIV",
+                text: "Một trong những thay đổi mang tính \"phá cách\" nhất trong tư duy chiến lược của Nghị quyết Đại hội XIV so với các kỳ đại hội trước là gì?",
+                options: [
+                    "Chuyển từ mô hình tăng trưởng \"nâu\" sang \"xanh\" hoàn toàn.",
+                    "Lần đầu tiên xác định phát triển kinh tế tư nhân là \"động lực quan trọng nhất\" của nền kinh tế, bên cạnh việc khẳng định kinh tế nhà nước giữ vai trò chủ đạo.",
+                    "Xóa bỏ hoàn toàn vai trò chủ đạo của kinh tế nhà nước.",
+                    "Ưu tiên phát triển các ngành công nghiệp khai thác tài nguyên."
+                ],
+                correct: 1
+            },
+            {
+                id: 2,
+                section: "I. NGHỊ QUYẾT ĐẠI HỘI XIV",
+                text: "Nghị quyết Đại hội XIV lần đầu tiên đưa ra mục tiêu tăng trưởng GDP bình quân cho giai đoạn 2026-2030 ở mức rất cao. Con số được nêu trong Văn kiện là bao nhiêu?",
+                options: [
+                    "6% - 7%/năm",
+                    "7% - 8%/năm",
+                    "8% - 9%/năm",
+                    "10%/năm trở lên"
+                ],
+                correct: 3
+            },
+            {
+                id: 3,
+                section: "I. NGHỊ QUYẾT ĐẠI HỘI XIV",
+                text: "Trong lĩnh vực quốc phòng, an ninh và đối ngoại, điểm mới mang tính đột phá về tư duy được Đại hội XIV xác định là gì?",
+                options: [
+                    "Tăng cường liên minh quân sự với các nước lớn.",
+                    "Chuyển từ thế \"phòng thủ\" sang \"tấn công\" trong chiến lược quân sự.",
+                    "Lần đầu tiên, đối ngoại, hội nhập quốc tế được đặt ngang hàng với quốc phòng, an ninh, tạo thành trụ cột quan trọng để bảo vệ Tổ quốc.",
+                    "Giảm chi ngân sách cho quốc phòng để tập trung cho phát triển kinh tế."
+                ],
+                correct: 2
+            },
+            {
+                id: 4,
+                section: "I. NGHỊ QUYẾT ĐẠI HỘI XIV",
+                text: "Về văn hóa, Nghị quyết Đại hội XIV đã kế thừa và phát triển tư tưởng của Nghị quyết 80-NQ/TW như thế nào trong bối cảnh \"kỷ nguyên vươn mình\"?",
+                options: [
+                    "Xác định văn hóa chỉ là lĩnh vực \"đi sau\" phục vụ kinh tế.",
+                    "Nhấn mạnh \"chính trị dẫn đường, văn hóa soi đường\" và yêu cầu phát triển văn hóa đồng bộ trên nền tảng 4 hệ giá trị (quốc gia, văn hóa, gia đình, con người Việt Nam).",
+                    "Thu hẹp phạm vi đầu tư cho văn hóa.",
+                    "Chỉ tập trung vào bảo tồn di sản, không đề cập đến sáng tạo mới."
+                ],
+                correct: 1
+            },
+            {
+                id: 5,
+                section: "I. NGHỊ QUYẾT ĐẠI HỘI XIV",
+                text: "Chỉ tiêu về tỷ lệ bao phủ bảo hiểm y tế đến năm 2030 được Đại hội XIV đặt ra ở mức nào, thể hiện mục tiêu an sinh xã hội toàn diện?",
+                options: [
+                    "Trên 90% dân số.",
+                    "Trên 95% dân số.",
+                    "Trên 98% dân số.",
+                    "100% dân số được bảo hiểm y tế chi trả toàn bộ chi phí."
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                section: "I. NGHỊ QUYẾT ĐẠI HỘI XIV",
+                text: "Về xây dựng Đảng, Đại hội XIV đã nhấn mạnh giải pháp đột phá nào liên quan đến tổ chức bộ máy?",
+                options: [
+                    "Khôi phục lại mô hình tổng cục trong các bộ.",
+                    "Triển khai hoạt động có hiệu quả tổ chức bộ máy hệ thống chính trị theo mô hình mới (3 cấp), bảo đảm vận hành đồng bộ, thông suốt.",
+                    "Tăng số lượng các đầu mối trung gian để kiểm soát quyền lực.",
+                    "Duy trì nguyên trạng bộ máy không thay đổi."
+                ],
+                correct: 1
+            },
+            {
+                id: 7,
+                section: "I. NGHỊ QUYẾT ĐẠI HỘI XIV",
+                text: "Một trong những điểm mới về phương pháp luận được đánh giá là \"bước đột phá\" trong tổ chức thực hiện Nghị quyết của Đại hội XIV so với các kỳ đại hội trước là gì?",
+                options: [
+                    "Kéo dài thời gian thực hiện Nghị quyết lên 10 năm.",
+                    "Lần đầu tiên ban hành Chương trình hành động kèm theo Nghị quyết, xác định rõ \"ai làm, làm khi nào, nguồn lực gì\", biến Nghị quyết thành \"cẩm nang hành động\".",
+                    "Giao toàn quyền tổ chức thực hiện cho Bộ Chính trị mà không cần kế hoạch chi tiết.",
+                    "Không yêu cầu các bộ, ngành xây dựng kế hoạch cụ thể."
+                ],
+                correct: 1
+            },
+            {
+                id: 8,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 57-NQ/TW",
+                text: "Điểm khác biệt cốt lõi nhất giữa Nghị quyết 57 và các Nghị quyết trước đó về KH&CN (Nghị quyết 20 và Nghị quyết 52) là gì?",
+                options: [
+                    "Nâng mức đầu tư cho KH&CN lên 2% GDP.",
+                    "Xác định lấy doanh nghiệp làm trung tâm của hệ thống đổi mới sáng tạo, chứ không phải viện nghiên cứu hay trường đại học.",
+                    "Thành lập thêm 10 viện nghiên cứu quốc gia.",
+                    "Ưu tiên phát triển khoa học cơ bản."
+                ],
+                correct: 1
+            },
+            {
+                id: 9,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 57-NQ/TW",
+                text: "Nghị quyết 57 yêu cầu \"thí điểm một số cơ chế, chính sách vượt trội\" nhưng không vượt quá giới hạn nào của thể chế?",
+                options: [
+                    "Không vượt quá khung chi tiêu của ngân sách trung ương.",
+                    "Không vượt quá tinh thần \"bảo lưu lợi ích quốc gia\" và Hiến pháp.",
+                    "Phải có pháp lệnh riêng của Ủy ban Thường vụ Quốc hội.",
+                    "Phải có sự đồng ý bằng văn bản của ít nhất 3 Bộ."
+                ],
+                correct: 1
+            },
+            {
+                id: 10,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 57-NQ/TW",
+                text: "Nghị quyết 57 đặt mục tiêu đến năm 2030, nhóm ngành công nghiệp công nghệ số đóng góp bao nhiêu % vào GDP, và con số này phản ánh điều gì?",
+                options: [
+                    "10% - phản ánh mức độ \"bắt kịp\" các nước ASEAN-4.",
+                    "20% - phản ánh kỳ vọng \"chuyển dịch cơ cấu mang tính hệ thống\".",
+                    "30% - phản ánh kỳ vọng \"đi tắt đón đầu\".",
+                    "40% - phản ánh mục tiêu \"thống trị khu vực\"."
+                ],
+                correct: 0
+            },
+            {
+                id: 11,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 57-NQ/TW",
+                text: "Mâu thuẫn tiềm ẩn nào được cho là lớn nhất khi thực thi Nghị quyết 57 về cơ chế \"tự chủ, tự chịu trách nhiệm\" của các viện nghiên cứu?",
+                options: [
+                    "Mâu thuẫn giữa \"tự chủ\" và cơ chế lương, thưởng cứng nhắc trong khu vực công.",
+                    "Mâu thuẫn giữa \"tự chịu trách nhiệm\" và quy định về tài sản công không bị thất thoát.",
+                    "Mâu thuẫn giữa \"thu hút nhân tài\" và \"cơ chế tuyển dụng biên chế\".",
+                    "Mâu thuẫn giữa \"hợp tác công - tư\" và \"phòng chống tham nhũng\"."
+                ],
+                correct: 0
+            },
+            {
+                id: 12,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 71-NQ/TW",
+                text: "Nghị quyết 71 yêu cầu thực hiện phương châm \"thầy ra thầy, trò ra trò\". Nội hàm cốt lõi của phương châm này là gì?",
+                options: [
+                    "Thầy chỉ dạy lý thuyết, trò chỉ học lý thuyết.",
+                    "Phân định rõ trách nhiệm, đạo đức, nhân cách, tri thức của người dạy và người học; kiên quyết chấn chỉnh tiêu cực trong giáo dục, coi trọng danh dự người thầy.",
+                    "Thầy và trò không được can thiệp vào công việc của nhau.",
+                    "Chỉ có thầy trong biên chế mới được dạy, chỉ có trò chính quy mới được học."
+                ],
+                correct: 1
+            },
+            {
+                id: 13,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 71-NQ/TW",
+                text: "Một trong những mục tiêu định lượng đột phá nhất của Nghị quyết 71 đến năm 2030 là gì?",
+                options: [
+                    "100% trường phổ thông đạt chuẩn quốc gia.",
+                    "Miễn học phí cho tất cả học sinh phổ thông.",
+                    "Có ít nhất 80% trường phổ thông đạt chuẩn quốc gia và hoàn thành phổ cập giáo dục mầm non cho trẻ từ 3-5 tuổi.",
+                    "Xóa bỏ hoàn toàn trường ngoài công lập."
+                ],
+                correct: 2
+            },
+            {
+                id: 14,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 71-NQ/TW",
+                text: "Nghị quyết 71 nhấn mạnh yêu cầu \"giáo dục công lập là trụ cột, giáo dục ngoài công lập là thành phần quan trọng\". Quan điểm này thể hiện sự điều chỉnh nào trong tư duy phát triển giáo dục?",
+                options: [
+                    "Khẳng định vai trò chủ đạo của nhà nước nhưng tạo không gian phát triển bình đẳng, liên thông cho các thành phần ngoài công lập.",
+                    "Từng bước thay thế giáo dục công lập bằng tư thục.",
+                    "Thu hẹp hoàn toàn giáo dục ngoài công lập.",
+                    "Xóa bỏ mọi hình thức giáo dục có thu phí."
+                ],
+                correct: 0
+            },
+            {
+                id: 15,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 71-NQ/TW",
+                text: "Nghị quyết 71 xác định \"giáo dục đại học là nòng cốt phát triển nhân lực trình độ cao, nhân tài, thúc đẩy phát triển khoa học, công nghệ và đổi mới sáng tạo\". Trong khi đó, \"giáo dục nghề nghiệp giữ vai trò then chốt\". Sự phân định này nhằm giải quyết vấn đề cốt lõi nào?",
+                options: [
+                    "Mâu thuẫn giữa đào tạo lý thuyết hàn lâm và thực hành kỹ năng.",
+                    "Chuyển toàn bộ đào tạo sang mô hình thực hành.",
+                    "Nâng cao vị thế của giáo dục nghề nghiệp ngang bằng với đại học.",
+                    "Khắc phục tình trạng \"thừa thầy, thiếu thợ\" và lãng phí nguồn nhân lực do mất cân đối cơ cấu đào tạo."
+                ],
+                correct: 3
+            },
+            {
+                id: 16,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 72-NQ/TW",
+                text: "Nghị quyết 72-NQ/TW xác định sự chuyển đổi tư duy lớn nhất trong công tác bảo vệ sức khỏe nhân dân là gì?",
+                options: [
+                    "Từ khám bệnh, chữa bệnh miễn phí sang thu phí toàn phần.",
+                    "Từ bảo hiểm y tế bắt buộc sang tự nguyện.",
+                    "Từ y học cổ truyền sang y học hiện đại.",
+                    "Chuyển mạnh từ tập trung khám bệnh, chữa bệnh sang chủ động phòng bệnh, chú trọng bảo vệ, chăm sóc, nâng cao sức khỏe toàn diện, liên tục theo vòng đời."
+                ],
+                correct: 3
+            },
+            {
+                id: 17,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 72-NQ/TW",
+                text: "Nghị quyết 72 nhấn mạnh \"sức khỏe là vốn quý nhất của con người, là nền tảng quan trọng nhất cho hạnh phúc\". Câu nói này được đặt trong mối quan hệ với các mục tiêu phát triển nào?",
+                options: [
+                    "Sức khỏe chỉ là một yếu tố phụ trợ cho phát triển kinh tế.",
+                    "Sức khỏe vừa là mục tiêu, vừa là nền tảng của phát triển đất nước; là nhiệm vụ chính trị hàng đầu, giữ vị trí ưu tiên trong các chiến lược, chính sách.",
+                    "Ưu tiên sức khỏe cho nhóm đối tượng có đóng góp kinh tế cao.",
+                    "Sức khỏe chỉ cần quan tâm khi có dịch bệnh."
+                ],
+                correct: 1
+            },
+            {
+                id: 18,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 72-NQ/TW",
+                text: "Ba lĩnh vực then chốt được Nghị quyết 72 yêu cầu xác định lại \"đúng vị thế, vai trò\" để tạo đột phá là gì?",
+                options: [
+                    "Y tế công nghệ cao, bảo hiểm y tế, dược phẩm.",
+                    "Y tế cấp cứu, y tế chuyên sâu, y tế từ xa.",
+                    "Y tế dự phòng, y tế cơ sở, y học cổ truyền.",
+                    "Y tế dự phòng, y tế cấp tỉnh, y tế quốc tế."
+                ],
+                correct: 2
+            },
+            {
+                id: 19,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 79-NQ/TW",
+                text: "Theo Nghị quyết 79, \"kinh tế nhà nước\" được hiểu là phạm vi bao gồm những nguồn lực nào?",
+                options: [
+                    "Chỉ bao gồm doanh nghiệp nhà nước 100% vốn.",
+                    "Bao gồm các nguồn lực do Nhà nước nắm giữ, quản lý và chi phối: đất đai, tài nguyên, hạ tầng, ngân sách, dự trữ quốc gia, doanh nghiệp nhà nước, vốn nhà nước tại doanh nghiệp, đơn vị sự nghiệp công lập.",
+                    "Chỉ bao gồm ngân sách nhà nước.",
+                    "Bao gồm tất cả các doanh nghiệp hoạt động trên lãnh thổ Việt Nam."
+                ],
+                correct: 1
+            },
+            {
+                id: 20,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 79-NQ/TW",
+                text: "Nghị quyết 79 yêu cầu giải quyết tốt mối quan hệ \"tam giác\" nào trong quản lý kinh tế nhà nước?",
+                options: [
+                    "Quan hệ giữa doanh nghiệp - người lao động - người tiêu dùng.",
+                    "Quan hệ giữa sản xuất - phân phối - tiêu dùng.",
+                    "Quan hệ giữa Trung ương - địa phương - doanh nghiệp.",
+                    "Quan hệ giữa Nhà nước - thị trường - xã hội."
+                ],
+                correct: 3
+            },
+            {
+                id: 21,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 79-NQ/TW",
+                text: "Nghị quyết 79 yêu cầu các nguồn lực kinh tế nhà nước phải được \"định giá, hạch toán đầy đủ theo nguyên tắc thị trường\". Yêu cầu này nhằm giải quyết vấn đề cốt lõi nào?",
+                options: [
+                    "Tăng thu ngân sách nhà nước.",
+                    "Tư nhân hóa tài sản công.",
+                    "Khắc phục tình trạng \"lãng phí ngầm\" và thất thoát do sử dụng tài sản nhà nước không tính đúng, tính đủ chi phí, từ đó nâng cao hiệu quả quản lý.",
+                    "Giảm quy mô kinh tế nhà nước."
+                ],
+                correct: 2
+            },
+            {
+                id: 22,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 80-NQ/TW",
+                text: "Điểm mới mang tính \"thay đổi tư duy hệ thống\" nhất của Nghị quyết 80 so với các nghị quyết trước về văn hóa là gì?",
+                options: [
+                    "Xác định văn hóa là \"nền tảng tinh thần của xã hội\".",
+                    "Tăng ngân sách cho văn hóa lên 3% GDP.",
+                    "Thành lập Bộ Văn hóa mới.",
+                    "Xác định văn hóa vừa là \"nền tảng, trụ cột\", vừa là \"hệ điều tiết\" của phát triển, không chỉ đơn thuần là lĩnh vực thụ hưởng mà còn là công cụ điều tiết các quan hệ xã hội."
+                ],
+                correct: 3
+            },
+            {
+                id: 23,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 80-NQ/TW",
+                text: "Nghị quyết 80 yêu cầu xây dựng \"thế trận an ninh văn hóa, an ninh con người\". Cơ chế vận hành của \"thế trận\" này trong không gian mạng được xác định như thế nào?",
+                options: [
+                    "Do lực lượng công an chuyên trách thực hiện độc lập.",
+                    "Kết hợp chặt chẽ giữa phát huy giá trị văn hóa tốt đẹp, tăng cường giáo dục đạo đức lối sống với kiểm soát, xử lý nghiêm các hành vi đưa tin xấu độc, vi phạm pháp luật.",
+                    "Cấm hoàn toàn mạng xã hội.",
+                    "Giao cho doanh nghiệp cung cấp dịch vụ tự quản lý."
+                ],
+                correct: 1
+            },
+            {
+                id: 24,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 80-NQ/TW",
+                text: "Nghị quyết 80 đặt yêu cầu \"cải cách thể chế văn hóa\" song song với đầu tư tài chính. Tại sao cải cách thể chế được coi là then chốt?",
+                options: [
+                    "Vì thiếu tiền cho văn hóa.",
+                    "Vì nếu thể chế còn chồng chéo, nhiều cửa, sẽ kìm hãm sự sáng tạo và phát triển của các hoạt động văn hóa ngoài công lập (tư nhân, cộng đồng).",
+                    "Vì muốn giảm bộ máy làm văn hóa.",
+                    "Vì muốn tư nhân hóa toàn bộ văn hóa."
+                ],
+                correct: 1
+            },
+            {
+                id: 25,
+                section: "II. CÁC NGHỊ QUYẾT CHUYÊN ĐỀ - Nghị quyết 80-NQ/TW",
+                text: "\"Xây dựng thế trận an ninh văn hóa trên không gian mạng\" đặt ra vấn đề nhạy cảm nhất trong thực tiễn quản lý là gì?",
+                options: [
+                    "Ngân sách cho an ninh mạng còn hạn hẹp.",
+                    "Thiếu nhân lực an ninh mạng giỏi.",
+                    "Mâu thuẫn giữa yêu cầu \"tự do sáng tạo, dân chủ hóa thông tin\" và yêu cầu \"kiểm soát nội dung, ngăn chặn thông tin xấu độc\" - ranh giới rất mong manh, dễ vô tình kìm hãm sự phát triển văn hóa số.",
+                    "Các nền tảng xuyên biên giới không hợp tác."
+                ],
+                correct: 2
+            },
+            {
+                id: 26,
+                section: "III. NGHỊ QUYẾT ĐẠI HỘI THÀNH PHỐ ĐÀ NẴNG",
+                text: "Theo tầm nhìn đến năm 2045, mục tiêu phát triển của thành phố Đà Nẵng là gì?",
+                options: [
+                    "Trở thành trung tâm nông nghiệp và xuất khẩu hàng hóa lớn nhất Việt Nam.",
+                    "Phát triển thành phố theo hướng công nghiệp hóa nặng và khai thác khoáng sản.",
+                    "Xây dựng thành phố Đà Nẵng trở thành đô thị sinh thái, khu thương mại tự do, trung tâm tài chính quốc tế, công nghiệp, logistics, khởi nghiệp đổi mới sáng tạo và du lịch đẳng cấp châu Á.",
+                    "Tập trung phát triển nông nghiệp xanh và bảo tồn thiên nhiên."
+                ],
+                correct: 2
+            },
+            {
+                id: 27,
+                section: "III. NGHỊ QUYẾT ĐẠI HỘI THÀNH PHỐ ĐÀ NẴNG",
+                text: "Trong nhiệm vụ và giải pháp: \"Tăng cường xây dựng, chỉnh đốn Đảng và hệ thống chỉnh trị trong sạch, vững mạnh toàn diện\" việc xây dựng đội ngũ cán bộ như thế nào?",
+                options: [
+                    "Cán bộ đủ đức, đủ tài, có năng lực thật sự, dám nghĩ, dám làm, dám chịu trách nhiệm vì lợi ích chung.",
+                    "Cán bộ có số lượng đông đảo, phân bổ rộng khắp.",
+                    "Cán bộ có trình độ ngoại ngữ và du học nước ngoài.",
+                    "Cán bộ chuyên sâu về kinh tế và tài chính."
+                ],
+                correct: 0
+            },
+            {
+                id: 28,
+                section: "III. NGHỊ QUYẾT ĐẠI HỘI THÀNH PHỐ ĐÀ NẴNG",
+                text: "Để nâng cao hiệu quả lãnh đạo, Đảng chú trọng thực hiện biện pháp nào sau đây?",
+                options: [
+                    "Tăng cường xây dựng cơ sở vật chất của Đảng.",
+                    "Tập trung phát triển kinh tế tư nhân.",
+                    "Đổi mới phương thức lãnh đạo, cầm quyền theo hướng khoa học, dân chủ, hiệu quả, sát thực tiễn.",
+                    "Giảm bớt các nguyên tắc sinh hoạt Đảng để linh hoạt hơn."
+                ],
+                correct: 2
+            },
+            {
+                id: 29,
+                section: "III. NGHỊ QUYẾT ĐẠI HỘI THÀNH PHỐ ĐÀ NẴNG",
+                text: "Phương châm quản lý được nhấn mạnh trong việc hoàn thiện mô hình chính quyền địa phương 2 cấp là gì?",
+                options: [
+                    "\"Địa phương quyết, địa phương làm, địa phương chịu trách nhiệm\"",
+                    "\"Trung ương chỉ đạo, địa phương thực hiện\"",
+                    "\"Cộng đồng tham gia, nhà nước giám sát\"",
+                    "\"Chính quyền quyết định, nhân dân làm theo\""
+                ],
+                correct: 0
+            },
+            {
+                id: 30,
+                section: "III. NGHỊ QUYẾT ĐẠI HỘI THÀNH PHỐ ĐÀ NẴNG",
+                text: "Phương châm \"Dân biết, dân bàn, dân làm, dân kiểm tra, dân giám sát, dân thụ hưởng\" được yêu cầu cụ thể hóa dưới hình thức nào?",
+                options: [
+                    "Thông qua các hội nghị hằng năm",
+                    "Trong các phong trào thi đua yêu nước",
+                    "Trong các chương trình giao lưu quốc tế",
+                    "Thành các quy định, quy chế cụ thể"
+                ],
+                correct: 3
+            },
+            {
+                id: 31,
+                section: "III. NGHỊ QUYẾT ĐẠI HỘI THÀNH PHỐ ĐÀ NẴNG",
+                text: "Phương châm Đại hội đại biểu lần thứ I Đảng bộ thành phố Đà Nẵng, nhiệm kỳ 2025 – 2030 là gì?",
+                options: [
+                    "Đoàn kết - Dân chủ - Kỷ cương - Sáng tạo - Phát triển",
+                    "Đoàn kết - Kỷ cương - Dân chủ - Sáng tạo - Phát triển",
+                    "Dân chủ - Đoàn kết - Kỷ cương - Sáng tạo - Phát triển",
+                    "Dân chủ - Kỷ cương - Đoàn kết - Sáng tạo - Phát triển"
+                ],
+                correct: 0
+            },
+            {
+                id: 32,
+                section: "III. NGHỊ QUYẾT ĐẠI HỘI THÀNH PHỐ ĐÀ NẴNG",
+                text: "Tại Đại hội đại biểu lần thứ I Đảng bộ thành phố Đà Nẵng, đồng chí Trần Cẩm Tú yêu cầu Đảng bộ thực hiện tốt hơn nữa các giá trị \"trung dũng, kiên cường\" và truyền thống \"dám nghĩ, dám làm, dám {...}\" trong xây dựng, kiến thiết Thành phố. Hãy điền từ đúng vào {...}?",
+                options: [
+                    "Sáng tạo",
+                    "Đột phá",
+                    "Xông pha",
+                    "Đổi mới"
+                ],
+                correct: 1
+            },
+            {
+                id: 33,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Trong Nghị quyết Đại hội Đảng bộ phường Hội An lần thứ I, nhiệm kỳ 2025-2030 đã đưa ra bao nhiêu nhiệm vụ và giải pháp?",
+                options: [
+                    "3 nhiệm vụ và giải pháp",
+                    "4 nhiệm vụ và giải pháp",
+                    "5 nhiệm vụ và giải pháp",
+                    "6 nhiệm vụ và giải pháp"
+                ],
+                correct: 2
+            },
+            {
+                id: 34,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Tại Đại hội Đại biểu Đảng bộ phường Hội An đã đề ra bao nhiêu khâu đột phá?",
+                options: [
+                    "02 khâu đột phá",
+                    "03 khâu đột phá",
+                    "04 khâu đột phá",
+                    "05 khâu đột phá"
+                ],
+                correct: 1
+            },
+            {
+                id: 35,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Chỉ tiêu thu nhập bình quân đầu người đến năm 2030 trong Nghị quyết Đại hội Đảng bộ phường Hội An nhiệm kỳ 2025-2030 là bao nhiêu?",
+                options: [
+                    "Thu nhập ít nhất 110 triệu đồng/năm",
+                    "Thu nhập ít nhất 115 triệu đồng/năm",
+                    "Thu nhập ít nhất 120 triệu đồng/năm",
+                    "Thu nhập ít nhất 125 triệu đồng/năm"
+                ],
+                correct: 2
+            },
+            {
+                id: 36,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Phương châm Đại hội Đại biểu Đảng bộ phường Hội An khóa I, nhiệm kỳ 2025-2030 là gì?",
+                options: [
+                    "Dân Chủ - Kỷ Cương - Đoàn Kết – Sáng Tạo",
+                    "Dân Chủ - Đoàn Kết – Sáng Tạo- Kỷ Cương",
+                    "Kỷ Cương - Dân Chủ - Đoàn Kết – Sáng Tạo",
+                    "Kỷ Cương- Đoàn Kết – Sáng Tạo- Dân Chủ"
+                ],
+                correct: 0
+            },
+            {
+                id: 37,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Nghị quyết xác định mục tiêu tổng quát xây dựng phường Hội An trở thành đô thị đặc thù mang bản sắc gì, với hạt nhân cốt lõi là Đô thị cổ?",
+                options: [
+                    "Đô thị du lịch - sinh thái - thông minh",
+                    "Đô thị di sản - văn hóa - sinh thái",
+                    "Đô thị du lịch đặc thù mang bản sắc di sản văn hóa - sinh thái - cảnh quan - môi trường, hiện đại, thông minh",
+                    "Đô thị di sản - sinh thái - sáng tạo"
+                ],
+                correct: 2
+            },
+            {
+                id: 38,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Nghị quyết xác định phường Hội An cần được xây dựng theo hướng văn hóa - du lịch - sinh thái với 4 tiêu chí cụ thể để \"cụ thể hóa\" mô hình. Đó là 4 tiêu chí nào?",
+                options: [
+                    "An toàn - sạch đẹp - thân thiện - hiếu khách",
+                    "Thịnh vượng - hấp dẫn - sống tốt - an toàn, an sinh, phúc lợi, sức khỏe và hạnh phúc",
+                    "Văn minh - giàu đẹp - nghĩa tình - hội nhập",
+                    "Sáng - xanh - sạch - đẹp"
+                ],
+                correct: 1
+            },
+            {
+                id: 39,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Nghị quyết chỉ ra một trong những hạn chế của nhiệm kỳ trước liên quan đến công tác phát triển đảng viên. Đó là nội dung gì?",
+                options: [
+                    "Công tác tạo nguồn phát triển đảng viên ở địa bàn dân cư gặp khó khăn, chưa chủ động, quyết liệt trong chỉ đạo kiểm tra, giám sát",
+                    "Thiếu nữ đảng viên trong cơ cấu cấp ủy",
+                    "Không kết nạp được đảng viên mới tại các doanh nghiệp ngoài nhà nước",
+                    "Chất lượng đảng viên sau kết nạp không đảm bảo"
+                ],
+                correct: 0
+            },
+            {
+                id: 40,
+                section: "IV. NGHỊ QUYẾT ĐẠI HỘI PHƯỜNG HỘI AN",
+                text: "Nghị quyết yêu cầu phối hợp chặt chẽ với phường Hội An Đông, Hội An Tây và xã Tân Hiệp để duy trì, phát triển quan hệ gì?",
+                options: [
+                    "Quan hệ kinh tế - thương mại",
+                    "Quan hệ truyền thống với các địa phương kết nghĩa, các thành phố quốc tế",
+                    "Quan hệ cung ứng lao động du lịch",
+                    "Quan hệ liên kết tiêu thụ nông sản"
+                ],
+                correct: 1
+            }
+        ];
+
+        let answered = {};
+        let allSections = {};
+
+        function initQuiz() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '';
+
+            let currentSection = '';
+            questions.forEach((q, index) => {
+                if (q.section !== currentSection) {
+                    currentSection = q.section;
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.className = 'section-title';
+                    sectionDiv.textContent = currentSection;
+                    contentDiv.appendChild(sectionDiv);
+                }
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-block';
+                questionDiv.id = `question-${q.id}`;
+
+                let optionsHTML = q.options.map((opt, optIndex) => {
+                    const optionLetters = ['A', 'B', 'C', 'D'];
+                    return `
+                        <label class="option" id="option-${q.id}-${optIndex}">
+                            <input type="radio" name="q${q.id}" value="${optIndex}" 
+                                onchange="handleAnswer(${q.id}, ${optIndex})">
+                            <span><strong>${optionLetters[optIndex]}.</strong> ${opt}</span>
+                        </label>
+                    `;
+                }).join('');
+
+                questionDiv.innerHTML = `
+                    <div class="question-number">Câu ${q.id}</div>
+                    <div class="question-text">${q.text}</div>
+                    <div class="options">
+                        ${optionsHTML}
+                    </div>
+                    <div class="feedback" id="feedback-${q.id}"></div>
+                `;
+
+                contentDiv.appendChild(questionDiv);
+            });
+        }
+
+        function handleAnswer(questionId, selectedIndex) {
+            const question = questions.find(q => q.id === questionId);
+            answered[questionId] = selectedIndex;
+
+            const questionBlock = document.getElementById(`question-${questionId}`);
+            const feedback = document.getElementById(`feedback-${questionId}`);
+
+            // Reset all options
+            for (let i = 0; i < 4; i++) {
+                const option = document.getElementById(`option-${questionId}-${i}`);
+                option.classList.remove('correct', 'incorrect', 'selected');
+            }
+
+            // Highlight selected option
+            const selectedOption = document.getElementById(`option-${questionId}-${selectedIndex}`);
+            selectedOption.classList.add('selected');
+
+            // Show correct/incorrect feedback
+            if (selectedIndex === question.correct) {
+                selectedOption.classList.remove('selected');
+                selectedOption.classList.add('correct');
+                questionBlock.classList.remove('incorrect');
+                questionBlock.classList.add('correct', 'answered');
+                feedback.className = 'feedback show correct-message';
+                feedback.innerHTML = '✅ Chính xác!';
+            } else {
+                selectedOption.classList.remove('selected');
+                selectedOption.classList.add('incorrect');
+                const correctOption = document.getElementById(`option-${questionId}-${question.correct}`);
+                correctOption.classList.add('correct');
+                questionBlock.classList.remove('correct');
+                questionBlock.classList.add('incorrect', 'answered');
+                feedback.className = 'feedback show incorrect-message';
+                feedback.innerHTML = `❌ Sai! Đáp án đúng là: <strong>${['A', 'B', 'C', 'D'][question.correct]}</strong>`;
+            }
+
+            updateStats();
+            updateProgress();
+        }
+
+        function updateStats() {
+            let correct = 0, incorrect = 0, skipped = 0;
+
+            questions.forEach(q => {
+                if (answered[q.id] === undefined) {
+                    skipped++;
+                } else if (answered[q.id] === q.correct) {
+                    correct++;
+                } else {
+                    incorrect++;
+                }
+            });
+
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('incorrectCount').textContent = incorrect;
+            document.getElementById('skippedCount').textContent = skipped;
+        }
+
+        function updateProgress() {
+            const answered_count = Object.keys(answered).length;
+            const progress = (answered_count / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function resetQuiz() {
+            answered = {};
+            questions.forEach(q => {
+                document.querySelectorAll(`input[name="q${q.id}"]`).forEach(input => {
+                    input.checked = false;
+                });
+                document.getElementById(`question-${q.id}`).className = 'question-block';
+                document.getElementById(`feedback-${q.id}`).className = 'feedback';
+            });
+            updateStats();
+            updateProgress();
+            document.getElementById('content').scrollTop = 0;
+        }
+
+        function showAllAnswers() {
+            questions.forEach(q => {
+                if (answered[q.id] === undefined) {
+                    handleAnswer(q.id, q.correct);
+                }
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initQuiz();
+            updateStats();
+        });
+    </script>
+</body>
+</html>
